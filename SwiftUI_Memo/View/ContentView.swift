@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var memoVM = MemoViewModel()
     var body: some View {
+        let memos = memoVM.memos.sorted { $0.postedDate > $1.postedDate }
+        
         NavigationView {
-            List {
-                ForEach(1...15, id: \.self) { _ in
-                    NavigationLink {
-                        Text("여기는 메모 디테일 뷰가 올것임")
-                    } label: {
-                        MemoItem()
-                    }
+            List(memos, id: \.self) { memo in
+                NavigationLink {
+                    MemoDetailView(memo: memo)
+                } label: {
+                    MemoItem(memo: memo)
                 }
+            }
+            .refreshable {
+                memoVM.refreshMemo()
             }
             .listStyle(.inset)
             .navigationTitle("Memo")
                 .toolbar {
                     NavigationLink {
-                        Text("여기는 메모 추가하는 뷰가 올것임")
+                        MemoEditor()
                     } label: {
                         Image(systemName: "plus")
                     }

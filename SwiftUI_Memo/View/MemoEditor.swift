@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct MemoEditor: View {
+    var memo: Memo
+    
+    @Environment(\.dismiss) var dismiss
     @State var title: String = ""
     @State var content: String = ""
-    
     @ObservedObject var memoVM: MemoViewModel = MemoViewModel()
     
     var body: some View {
@@ -27,6 +29,9 @@ struct MemoEditor: View {
                     TextField("클릭해서 제목을 입력", text: $title)
                         .submitLabel(.done)
                         .disableAutocorrection(true)
+                        .onAppear {
+                            title = memo.title
+                        }
                         
                 }
                 
@@ -38,19 +43,35 @@ struct MemoEditor: View {
                     .foregroundColor(.red)
                     .font(.system(size: 20))
                 ) {
-                    TextField("클릭해서 메모를 입력", text: $content)
+                    TextEditor(text: $content)
                         .font(.body)
                         .disableAutocorrection(true)
                         .submitLabel(.done)
-                        .frame(width:.infinity, height: 500, alignment: .topLeading)
+                        .frame(height: 500)
+                        .onAppear {
+                            content = memo.text
+                        }
+                        
                 }
             }            
             .toolbar {
-                Button {
-                    memoVM.add(text: content, title: title)
-                } label: {
-                    Text("저장하기")
+                if memo.title.isEmpty {
+                    Button {
+                        memoVM.add(text: content, title: title)
+                        dismiss()
+                    } label: {
+                        Text("저장하기")
+                    }
+                } else {
+                    Button {
+                        memoVM.editMemo(old: memo, title: title, text: content)
+                        dismiss()
+                    } label: {
+                        Text("편집완료")
+                    }
                 }
+                
+                
 
             }
             
@@ -60,6 +81,6 @@ struct MemoEditor: View {
 
 struct MemoEditor_Previews: PreviewProvider {
     static var previews: some View {
-        MemoEditor()
+        MemoEditor(memo: Memo())
     }
 }

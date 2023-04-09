@@ -10,8 +10,44 @@ import SwiftUI
 struct MemoDetailView: View {
     var memo: Memo
     
+    @Environment(\.dismiss) var dismiss
+    
+    @ObservedObject var memoVM = MemoViewModel()
+    @State var delCheck: Bool = false
+    
     var body: some View {
-        Text("메모 디테일 뷰")
+        VStack(alignment:.leading){
+            Divider()
+            Text(memo.text)
+                .font(.system(size: 18))
+                .padding()
+            Spacer()
+        }.navigationTitle(memo.title)
+            .toolbar {
+                Button {
+                    self.delCheck = true
+                } label: {
+                    Image(systemName: "trash")
+                }
+                NavigationLink {
+                    MemoEditor(memo: memo)
+                } label: {
+                    Image(systemName: "pencil")
+                }
+
+            }
+            .alert("정말 삭제 하시겠습니까?", isPresented: $delCheck) {
+                Button {
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        Memo.delMemo(memo)
+                    }
+                    
+                } label: {
+                    Text("확인")
+                }
+                Button("아니요", role: .cancel) {}
+            }
     }
 }
 

@@ -27,7 +27,7 @@ struct ContentView: View {
             .navigationTitle("Memo")
                 .toolbar {
                     NavigationLink {
-                        MemoEditor()
+                        MemoEditor(memo: Memo())
                     } label: {
                         Image(systemName: "plus")
                     }

@@ -11,6 +11,11 @@
 		CF2616C029E2EBA10031AF47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2616BF29E2EBA10031AF47 /* ContentView.swift */; };
 		CF2616C229E2EBA20031AF47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2616C129E2EBA20031AF47 /* Assets.xcassets */; };
 		CF2616C529E2EBA20031AF47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2616C429E2EBA20031AF47 /* Preview Assets.xcassets */; };
+		CF2616CD29E2EC230031AF47 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CF2616CC29E2EC230031AF47 /* Realm */; };
+		CF2616CF29E2EC230031AF47 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF2616CE29E2EC230031AF47 /* RealmSwift */; };
+		CF2616D429E2EC780031AF47 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2616D329E2EC780031AF47 /* Data.swift */; };
+		CF2616D629E2EF270031AF47 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2616D529E2EF270031AF47 /* MemoViewModel.swift */; };
+		CF2616D829E2F0810031AF47 /* MemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2616D729E2F0810031AF47 /* MemoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,9 @@
 		CF2616BF29E2EBA10031AF47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CF2616C129E2EBA20031AF47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2616C429E2EBA20031AF47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CF2616D329E2EC780031AF47 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		CF2616D529E2EF270031AF47 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
+		CF2616D729E2F0810031AF47 /* MemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2616CF29E2EC230031AF47 /* RealmSwift in Frameworks */,
+				CF2616CD29E2EC230031AF47 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +61,9 @@
 		CF2616BC29E2EBA10031AF47 /* SwiftUI_Memo */ = {
 			isa = PBXGroup;
 			children = (
-				CF2616BD29E2EBA10031AF47 /* SwiftUI_MemoApp.swift */,
-				CF2616BF29E2EBA10031AF47 /* ContentView.swift */,
+				CF2616D229E2EC6C0031AF47 /* ViewModel */,
+				CF2616D129E2EC660031AF47 /* Model */,
+				CF2616D029E2EC5C0031AF47 /* View */,
 				CF2616C129E2EBA20031AF47 /* Assets.xcassets */,
 				CF2616C329E2EBA20031AF47 /* Preview Content */,
 			);
@@ -65,6 +76,32 @@
 				CF2616C429E2EBA20031AF47 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CF2616D029E2EC5C0031AF47 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF2616BD29E2EBA10031AF47 /* SwiftUI_MemoApp.swift */,
+				CF2616BF29E2EBA10031AF47 /* ContentView.swift */,
+				CF2616D729E2F0810031AF47 /* MemoItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF2616D129E2EC660031AF47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF2616D329E2EC780031AF47 /* Data.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CF2616D229E2EC6C0031AF47 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CF2616D529E2EF270031AF47 /* MemoViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +120,10 @@
 			dependencies = (
 			);
 			name = SwiftUI_Memo;
+			packageProductDependencies = (
+				CF2616CC29E2EC230031AF47 /* Realm */,
+				CF2616CE29E2EC230031AF47 /* RealmSwift */,
+			);
 			productName = SwiftUI_Memo;
 			productReference = CF2616BA29E2EBA10031AF47 /* SwiftUI_Memo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +152,9 @@
 				Base,
 			);
 			mainGroup = CF2616B129E2EBA10031AF47;
+			packageReferences = (
+				CF2616CB29E2EC230031AF47 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = CF2616BB29E2EBA10031AF47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +181,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2616D629E2EF270031AF47 /* MemoViewModel.swift in Sources */,
 				CF2616C029E2EBA10031AF47 /* ContentView.swift in Sources */,
+				CF2616D429E2EC780031AF47 /* Data.swift in Sources */,
+				CF2616D829E2F0810031AF47 /* MemoItem.swift in Sources */,
 				CF2616BE29E2EBA10031AF47 /* SwiftUI_MemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +386,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF2616CB29E2EC230031AF47 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.38.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF2616CC29E2EC230031AF47 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF2616CB29E2EC230031AF47 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CF2616CE29E2EC230031AF47 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF2616CB29E2EC230031AF47 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF2616B229E2EBA10031AF47 /* Project object */;
 }
